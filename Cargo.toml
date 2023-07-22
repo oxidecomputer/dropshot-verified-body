@@ -1,0 +1,29 @@
+[package]
+name = "dropshot-verified-body"
+version = "0.1.0"
+edition = "2021"
+license = "MPL-2.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[features]
+github = [
+  "hex",
+  "sha2",
+  "thiserror"
+]
+
+[dependencies]
+async-trait = "0.1.72"
+digest = "0.10.7"
+dropshot = "0.9.0"
+hex = { version = "0.4.3", optional = true }
+hmac_ext = { package = "hmac", version = "0.12.1" }
+http = "0.2.9"
+hyper = "0.14.27"
+schemars = "0.8.12"
+serde = { version = "1.0.174", features = ["derive"] }
+serde_json = "1.0.103"
+sha2 = { version = "0.10.7", optional = true }
+thiserror = { version = "1.0.44", optional = true }
+tracing = "0.1.37"
