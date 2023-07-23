@@ -7,12 +7,13 @@
 use async_trait::async_trait;
 use digest::KeyInit;
 use dropshot::{
-    ApiEndpointBodyContentType, ExclusiveExtractor, ExtractorMetadata, HttpError, RequestContext, ServerContext, TypedBody, UntypedBody,
+    ApiEndpointBodyContentType, ExclusiveExtractor, ExtractorMetadata, HttpError, RequestContext,
+    ServerContext, TypedBody, UntypedBody,
 };
 use hmac_ext::Mac;
 use schemars::JsonSchema;
 use serde::de::DeserializeOwned;
-use std::{borrow::Cow, marker::PhantomData, error::Error};
+use std::{borrow::Cow, error::Error, marker::PhantomData};
 use tracing::instrument;
 
 /// A request body that has been verified by an HMAC verifier `T`.
@@ -145,10 +146,7 @@ where
                 let verified = mac.verify_slice(&signature).is_ok();
 
                 if !verified {
-                    tracing::info!(
-                        ?signature,
-                        "Failed to verify signature",
-                    );
+                    tracing::info!(?signature, "Failed to verify signature",);
                 } else {
                     tracing::info!("Successfully verified signature",);
                 }
