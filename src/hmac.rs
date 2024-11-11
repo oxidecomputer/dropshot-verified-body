@@ -100,7 +100,7 @@ where
 {
     async fn from_request<Context: ServerContext>(
         rqctx: &RequestContext<Context>,
-        request: hyper::Request<hyper::Body>,
+        request: hyper::Request<dropshot::Body>,
     ) -> Result<HmacVerifiedBody<T, BodyType>, HttpError> {
         let audit = HmacVerifiedBodyAudit::<T, BodyType>::from_request(rqctx, request).await?;
 
@@ -129,7 +129,7 @@ where
     #[instrument(skip(rqctx, request), fields(request_id = rqctx.request_id, uri = ?request.uri()))]
     async fn from_request<Context: ServerContext>(
         rqctx: &RequestContext<Context>,
-        request: hyper::Request<hyper::Body>,
+        request: hyper::Request<dropshot::Body>,
     ) -> Result<HmacVerifiedBodyAudit<T, BodyType>, HttpError> {
         let body = UntypedBody::from_request(rqctx, request).await?;
         let content = T::content(rqctx, &body)
