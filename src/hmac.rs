@@ -7,8 +7,7 @@
 use async_trait::async_trait;
 use digest::KeyInit;
 use dropshot::{
-    ApiEndpointBodyContentType, ExclusiveExtractor, ExtractorMetadata, HttpError, RequestContext,
-    ServerContext, TypedBody, UntypedBody,
+    ApiEndpointBodyContentType, ClientErrorStatusCode, ExclusiveExtractor, ExtractorMetadata, HttpError, RequestContext, ServerContext, TypedBody, UntypedBody
 };
 use hmac_ext::Mac;
 use schemars::JsonSchema;
@@ -165,7 +164,7 @@ where
         Ok(HmacVerifiedBodyAudit {
             body,
             _body_type: PhantomData,
-            content_type: rqctx.body_content_type.clone(),
+            content_type: rqctx.endpoint.body_content_type.clone(),
             verified,
             _verifier: PhantomData,
         })
@@ -218,7 +217,7 @@ where
 }
 
 pub fn unauthorized() -> HttpError {
-    HttpError::for_client_error(None, http::StatusCode::UNAUTHORIZED, "".to_string())
+    HttpError::for_client_error(None, ClientErrorStatusCode::UNAUTHORIZED, "".to_string())
 }
 
 pub fn internal_error() -> HttpError {
