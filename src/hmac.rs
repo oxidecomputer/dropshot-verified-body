@@ -7,7 +7,8 @@
 use async_trait::async_trait;
 use digest::KeyInit;
 use dropshot::{
-    ApiEndpointBodyContentType, ClientErrorStatusCode, ExclusiveExtractor, ExtractorMetadata, HttpError, RequestContext, ServerContext, TypedBody, UntypedBody
+    ApiEndpointBodyContentType, ClientErrorStatusCode, ExclusiveExtractor, ExtractorMetadata,
+    HttpError, RequestContext, ServerContext, TypedBody, UntypedBody,
 };
 use hmac_ext::Mac;
 use schemars::JsonSchema;
