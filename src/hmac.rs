@@ -138,7 +138,7 @@ where
         let key = T::key(rqctx).await.map_err(|_| internal_error())?;
 
         let signature = T::signature(rqctx).await;
-        let mac = <T::Algo as Mac>::new_from_slice(&key);
+        let mac = <T::Algo as KeyInit>::new_from_slice(&key);
 
         let verified = match (signature, mac) {
             (Ok(signature), Ok(mut mac)) => {
