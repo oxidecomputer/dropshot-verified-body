@@ -14,7 +14,7 @@ github = [
 ]
 
 [dependencies]
-async-trait = "0.1.89"
+async-trait = "0.1.92"
 digest = { version = "0.11.3", features = ["mac"] }
 dropshot = "0.17"
 hex = { version = "0.4.3", optional = true }
